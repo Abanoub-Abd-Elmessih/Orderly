@@ -7,6 +7,12 @@ import { Bounce, ToastContainer } from "react-toastify";
 import Dashboard from "./admin/Dashboard";
 import AdminRoute from "./routes/AdminRoute";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import Products from "./pages/Products";
+import AddProducts from "./admin/AddProducts";
+import DashboardOverview from "./admin/DashboardOverview";
+import AdminProducts from "./admin/AdminProducts";
+import AddProduct from "./admin/AddProducts";
+import EditProductPage from "./admin/EditProductPage";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -23,15 +29,39 @@ const App = () => {
           element: <Home />,
         },
         {
-          path: "/admin/dashboard",
-          element: (
-            <AdminRoute>
-              <Dashboard />
-            </AdminRoute>
-          ),
+          path: "products",
+          element: <Products />,
         },
       ],
     },
+
+    {
+      path: "/admin/dashboard",
+      element: (
+        <AdminRoute>
+          <Dashboard />
+        </AdminRoute>
+      ),
+      children: [
+        {
+          index: true,
+          element: <DashboardOverview />,
+        },
+        {
+          path: "products",
+          element: <AdminProducts />,
+        },
+        {
+          path: "products/add",
+          element: <AddProduct />,
+        },
+        {
+          path: "products/edit/:id",
+          element: <EditProductPage />,
+        },
+      ],
+    },
+
     {
       path: "signUp",
       element: <SignUp />,
@@ -41,6 +71,7 @@ const App = () => {
       element: <SignIn />,
     },
   ]);
+
   return (
     <>
       <RouterProvider router={router} />

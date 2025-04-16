@@ -130,19 +130,20 @@ const SignUp = () => {
           defaultValue=""
           rules={{ required: "Role is required" }}
           render={({ field, fieldState: { error } }) => (
-            <div className="flex flex-col">
+            <fieldset className="fieldset">
               <select
+                defaultValue="Pick a browser"
+                className="select w-full"
                 {...field}
-                className="p-3 border-2 border-gray-400 rounded-lg text-black focus:outline-none"
               >
-                <option value="">Select Role</option>
+                <option disabled={true}>Select Role</option>
                 <option value="customer">Customer</option>
                 <option value="admin">Admin</option>
               </select>
               {error && (
                 <p className="text-red-500 text-sm mt-1">{error.message}</p>
               )}
-            </div>
+            </fieldset>
           )}
         />
 
