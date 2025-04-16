@@ -41,6 +41,9 @@ export const Header = () => {
             )}
 
             <li>
+              <Link to={"/"}>Home</Link>
+            </li>
+            <li>
               <Link to={"/products"}>Products</Link>
             </li>
             <li>
@@ -60,6 +63,9 @@ export const Header = () => {
               <Link to={"/admin/dashboard"}>Dashboard</Link>
             </li>
           )}
+          <li>
+            <Link to={"/"}>Home</Link>
+          </li>
           <li>
             <Link to={"/products"}>Products</Link>
           </li>

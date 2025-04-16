@@ -1,14 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import {
+  Box,
+  HomeIcon,
+  LayoutDashboard,
+  ListOrdered,
+  LogOutIcon,
+  ShoppingCartIcon,
+} from "lucide-react";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export const Sidebar = ({ children }) => {
   const drawerRef = useRef(null);
+  const navigate = useNavigate();
+  const { remove } = useLocalStorage("currentUser");
 
   const closeDrawer = () => {
     if (drawerRef.current) {
       drawerRef.current.checked = false;
     }
   };
+    function logout() {
+      remove();
+      navigate("/signIn");
+    }
 
   return (
     <div className="drawer lg:drawer-open">
@@ -57,24 +72,52 @@ export const Sidebar = ({ children }) => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-base-200 h-full w-80 p-4">
-          <p className="border-b-2 py-1 mb-2 font-bold text-center">
-            Admin Dashboard
-          </p>
-          <li>
-            <Link to="/admin/dashboard" onClick={closeDrawer}>
-              Dashboard Overview
-            </Link>
-          </li>
-          <li>
-            <Link to="products" onClick={closeDrawer}>
-              Products
-            </Link>
-          </li>
-          <li>
-            <Link to={"/orders"} onClick={closeDrawer}>Orders</Link>
-          </li>
-        </ul>
+
+        <div className="bg-base-200 h-full w-80 p-4 flex flex-col justify-between">
+          <ul className="menu w-full">
+            <p className="border-b-2 py-1 mb-2 font-bold text-center">
+              Admin Dashboard
+            </p>
+            <li>
+              <Link to="/admin/dashboard" onClick={closeDrawer} >
+                <LayoutDashboard className="size-5" />
+                Dashboard Overview
+              </Link>
+            </li>
+            <li>
+              <Link to="products" onClick={closeDrawer} >
+                <Box className="size-5" />
+                Products
+              </Link>
+            </li>
+            <li>
+              <Link to={"/orders"} onClick={closeDrawer} >
+                <ListOrdered className="size-5" />
+                Orders
+              </Link>
+            </li>
+            <li>
+              <Link to={"/"} onClick={closeDrawer} >
+                <HomeIcon className="size-5" /> Home
+              </Link>
+            </li>
+            <li>
+              <Link to={"/"} onClick={closeDrawer} >
+                <ShoppingCartIcon className="size-5" /> Cart
+              </Link>
+            </li>
+          </ul>
+
+          <div className="mt-4 border-t pt-4">
+            <button
+              onClick={logout}
+              className="flex w-full items-center gap-2 text-red-500 hover:text-red-700"
+            >
+              <LogOutIcon className="size-5" />
+              Logout
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

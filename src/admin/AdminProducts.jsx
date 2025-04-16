@@ -34,7 +34,7 @@ const AdminProducts = () => {
   const confirmDelete = () => {
     setProducts(products.filter((product) => product.id !== selectedProductId));
     closeModal();
-    toast.success("product deleted successfully.");
+    toast.success("Product deleted successfully.");
   };
 
   return (
@@ -46,47 +46,49 @@ const AdminProducts = () => {
         <button className="btn btn-primary w-full">Add New Product</button>
       </Link>
       <div className="mt-5 px-5 border-t">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Row</th>
-              <th>Image</th>
-              <th>Name</th>
-              <th>category</th>
-              <th>Price</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((product, index) => (
-              <tr key={product.id}>
-                <td>{index + 1}</td>
-                <td>
-                  <img
-                    src={product.imageUrl}
-                    alt={product.name}
-                    className="w-24 h-20 object-cover rounded hover:opacity-80 transition cursor-pointer"
-                    onClick={() => setSelectedImage(product.imageUrl)}
-                  />
-                </td>
-                <td>{product.name}</td>
-                <td>{product.category}</td>
-                <td>{product.price} $</td>
-                <td className="flex gap-2">
-                  <Link to={`edit/${product.id}`}>
-                    <button className="btn bg-slate-600">Edit</button>
-                  </Link>
-                  <button
-                    className="btn bg-red-600/80 hover:bg-red-600 duration-300"
-                    onClick={() => openModal(product.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
+        <div className="overflow-x-auto">
+          <table className="table w-full">
+            <thead>
+              <tr>
+                <th>Row</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {products.map((product, index) => (
+                <tr key={product.id}>
+                  <td>{index + 1}</td>
+                  <td>
+                    <img
+                      src={product.imageUrl}
+                      alt={product.name}
+                      className="w-24 h-20 object-cover rounded hover:opacity-80 transition cursor-pointer"
+                      onClick={() => setSelectedImage(product.imageUrl)}
+                    />
+                  </td>
+                  <td>{product.name}</td>
+                  <td>{product.category}</td>
+                  <td>{product.price} $</td>
+                  <td className="flex gap-2">
+                    <Link to={`edit/${product.id}`}>
+                      <button className="btn bg-slate-600">Edit</button>
+                    </Link>
+                    <button
+                      className="btn bg-red-600/80 hover:bg-red-600 duration-300"
+                      onClick={() => openModal(product.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {selectedImage && (

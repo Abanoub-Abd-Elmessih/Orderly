@@ -31,7 +31,7 @@ const AddProduct = () => {
       reader.onloadend = () => {
         setProduct((prev) => ({
           ...prev,
-          imageUrl: reader.result, // base64 string
+          imageUrl: reader.result,
         }));
       };
       reader.readAsDataURL(file);
