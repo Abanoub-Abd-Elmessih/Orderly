@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import useLang from "../hooks/useLang";
 
 const EditProductPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const {t} = useLang()
 
   const [product, setProduct] = useState(null);
 
@@ -54,7 +56,7 @@ const EditProductPage = () => {
     );
 
     localStorage.setItem("products", JSON.stringify(updatedProducts));
-    toast.success("Product Updated Successfully.");
+    toast.success(t("Product_Updated_Successfully"));
     navigate("/admin/dashboard/products");
   };
 
@@ -63,7 +65,7 @@ const EditProductPage = () => {
   return (
     <div className="mt-5">
       <h2 className="mb-4 text-center font-semibold text-3xl">
-        Edit Product
+        {t("Edit_Product")}
       </h2>
       <form
         onSubmit={handleSubmit}
@@ -127,7 +129,7 @@ const EditProductPage = () => {
         />
 
         <button type="submit" className="btn btn-primary w-100">
-          Update Product
+          {t("Update Product")}
         </button>
       </form>
     </div>

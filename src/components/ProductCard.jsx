@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { toast } from "react-toastify";
+import useLang from "../hooks/useLang";
 
 const ProductCard = ({ product }) => {
   const { get, set } = useLocalStorage("cart");
+  const { t } = useLang();
 
   const handleAddToCart = () => {
     const currentCart = get() || [];
@@ -22,7 +24,7 @@ const ProductCard = ({ product }) => {
     }
 
     set(updatedCart);
-    toast.success("Product added to cart successfully!");
+    toast.success(t("Product_added_to_cart_successfully"));
   };
 
   return (
@@ -40,7 +42,7 @@ const ProductCard = ({ product }) => {
       <p className="text-base font-bold">${product.price}</p>
 
       <button onClick={handleAddToCart} className="mt-4 btn btn-primary">
-        Add to Cart
+        {t("Add_to_Cart")}
       </button>
     </div>
   );

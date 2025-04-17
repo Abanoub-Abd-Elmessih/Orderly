@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import useLang from "../hooks/useLang";
 
 export const Header = () => {
   const currentUserStorage = useLocalStorage("currentUser");
   const role = currentUserStorage.get().role;
   const navigate = useNavigate();
+  const { lang, setLang, t } = useLang();
 
   function logout() {
     currentUserStorage.remove();
@@ -36,18 +38,23 @@ export const Header = () => {
           >
             {role === "admin" && (
               <li>
-                <Link to={"/admin/dashboard"}>Dashboard</Link>
+                <Link to={"/admin/dashboard"}>{t("Dashboard")}</Link>
               </li>
             )}
 
             <li>
-              <Link to={"/"}>Home</Link>
+              <Link to={"/"}>{t("Home")}</Link>
             </li>
             <li>
-              <Link to={"/products"}>Products</Link>
+              <Link to={"/products"}>{t("Products")}</Link>
             </li>
             <li>
-              <Link to={"/cart"}>Cart</Link>
+              <Link to={"/cart"}>{t("Cart")}</Link>
+            </li>
+            <li>
+              <button onClick={() => setLang(lang === "en" ? "ar" : "en")}>
+                {lang === "en" ? "AR" : "EN"}
+              </button>
             </li>
           </ul>
         </div>
@@ -57,22 +64,28 @@ export const Header = () => {
         <ul className="menu menu-horizontal px-1">
           {role === "admin" && (
             <li>
-              <Link to={"/admin/dashboard"}>Dashboard</Link>
+              <Link to={"/admin/dashboard"}>{t("Dashboard")}</Link>
             </li>
           )}
+
           <li>
-            <Link to={"/"}>Home</Link>
+            <Link to={"/"}>{t("Home")}</Link>
           </li>
           <li>
-            <Link to={"/products"}>Products</Link>
+            <Link to={"/products"}>{t("Products")}</Link>
           </li>
           <li>
-            <Link to={"/cart"}>Cart</Link>
+            <Link to={"/cart"}>{t("Cart")}</Link>
+          </li>
+          <li>
+            <button onClick={() => setLang(lang === "en" ? "ar" : "en")}>
+              {lang === "en" ? "AR" : "EN"}
+            </button>
           </li>
         </ul>
       </div>
       <div className="navbar-end" onClick={logout}>
-        <button className="btn">Logout</button>
+        <button className="btn">{t("Logout")}</button>
       </div>
     </div>
   );

@@ -9,11 +9,13 @@ import {
   ShoppingCartIcon,
 } from "lucide-react";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import useLang from "../../hooks/useLang";
 
 export const Sidebar = ({ children }) => {
   const drawerRef = useRef(null);
   const navigate = useNavigate();
   const { remove } = useLocalStorage("currentUser");
+  const {t } = useLang()
 
   const closeDrawer = () => {
     if (drawerRef.current) {
@@ -58,7 +60,7 @@ export const Sidebar = ({ children }) => {
             </label>
           </div>
           <div className="flex-1 px-2 mx-2 font-semibold">
-            <Link to="/admin/dashboard">Orderly Dashboard.</Link>
+            <Link to="/admin/dashboard">Orderly {t("Dashboard")}.</Link>
           </div>
         </div>
 
@@ -76,41 +78,41 @@ export const Sidebar = ({ children }) => {
         <div className="bg-base-200 h-full w-80 p-4 flex flex-col justify-between">
           <ul className="menu w-full">
             <p className="border-b-2 py-1 mb-2 font-bold text-center">
-              Admin Dashboard
+              {t("Admin_Dashboard")}
             </p>
             <li>
               <Link to="/admin/dashboard" onClick={closeDrawer}>
                 <LayoutDashboard className="size-5" />
-                Dashboard Overview
+                {t("Dashboard_Overview")}
               </Link>
             </li>
             <li>
               <Link to="products" onClick={closeDrawer}>
                 <Box className="size-5" />
-                Admin Products
+                {t("Admin_Products")}
               </Link>
             </li>
 
             <li>
               <Link to={"/orders"} onClick={closeDrawer}>
                 <ListOrdered className="size-5" />
-                Orders
+                {t("Order")}
               </Link>
             </li>
             <li>
-              <Link to={"/orders"} onClick={closeDrawer}>
-                <HomeIcon className="size-5" /> Home
+              <Link to={"/"} onClick={closeDrawer}>
+                <HomeIcon className="size-5" /> {t("Home")}
               </Link>
             </li>
             <li>
               <Link to="/products" onClick={closeDrawer}>
                 <Box className="size-5" />
-                Customer Products
+                {t("Customer_Products")}
               </Link>
             </li>
             <li>
               <Link to={"/cart"} onClick={closeDrawer}>
-                <ShoppingCartIcon className="size-5" /> Cart
+                <ShoppingCartIcon className="size-5" /> {t("Cart")}
               </Link>
             </li>
           </ul>
@@ -121,7 +123,7 @@ export const Sidebar = ({ children }) => {
               className="flex w-full items-center gap-2 text-red-500 hover:text-red-700"
             >
               <LogOutIcon className="size-5" />
-              Logout
+            {t("Logout")}
             </button>
           </div>
         </div>

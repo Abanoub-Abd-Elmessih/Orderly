@@ -2,12 +2,14 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { toast } from "react-toastify";
+import useLang from "../hooks/useLang";
 
 const ProductDetails = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const { get: getProducts } = useLocalStorage("products");
   const { get: getCart, set: setCart } = useLocalStorage("cart");
+  const { t } = useLang();
 
   const products = getProducts() || [];
   console.log("Available products in cart:", products);
@@ -15,7 +17,7 @@ const ProductDetails = () => {
   const product = products.find((item) => item.id === parseInt(productId));
 
   if (!product) {
-    return <div>Product not found</div>;
+    return <div>{t("Product_not_found")}</div>;
   }
 
   const { name, imageUrl, price, description } = product;
@@ -33,7 +35,7 @@ const ProductDetails = () => {
     }
 
     setCart(cartItems);
-    toast.success("Product added to cart!");
+    toast.success(t("Product_added_to_cart_successfully"));
   };
 
   return (
@@ -58,13 +60,13 @@ const ProductDetails = () => {
               onClick={addToCart}
               className="btn btn-primary w-full py-3 mt-6"
             >
-              Add to Cart
+              {t("Add_to_Cart")}
             </button>
             <button
               onClick={() => navigate("/")}
               className="btn btn-outline mt-3 w-full py-3"
             >
-              Continue Shopping
+              {t("Continue_Shopping")}
             </button>
           </div>
         </div>

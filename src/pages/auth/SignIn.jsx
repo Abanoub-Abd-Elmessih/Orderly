@@ -3,6 +3,7 @@ import { Input } from "../../components/Input";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import useLang from "../../hooks/useLang";
 
 const SignIn = () => {
   const { control, handleSubmit } = useForm();
@@ -10,10 +11,12 @@ const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const currentUserStorage = useLocalStorage("currentUser");
   const userStorage = useLocalStorage("users");
+  const { t } = useLang();
 
   useEffect(() => {
     const currentUser = currentUserStorage.get();
     const justSignedUp = localStorage.getItem("justSignedUp");
+
 
     if (currentUser && !justSignedUp) {
       navigate("/");
@@ -51,8 +54,8 @@ const SignIn = () => {
 
   return (
     <section className="h-screen flex flex-col justify-center items-center text-center p-3">
-      <h2 className="font-bold text-2xl lg:text-4xl mb-3 text-center">Welcome Back to Orderly.</h2>
-      <p className="text-lg lg:text-2xl">Sign in to your account</p>
+      <h2 className="font-bold text-2xl lg:text-4xl mb-3 text-center">{t("Welcome_Back_to")} Orderly.</h2>
+      <p className="text-lg lg:text-2xl">{t("Sign_in_to_your_account")}</p>
 
       <form
         onSubmit={handleSubmit(submit)}
@@ -71,7 +74,7 @@ const SignIn = () => {
           control={control}
           defaultValue=""
           rules={{
-            required: "Email is required",
+            required: `${t("Email_is_required")}`,
             pattern: {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
               message: "Invalid email format",
@@ -93,7 +96,7 @@ const SignIn = () => {
           control={control}
           defaultValue=""
           rules={{
-            required: "Password is required",
+            required: `${t("Password_is_required")}`,
           }}
           render={({ field, fieldState: { error } }) => (
             <div className="flex flex-col">
@@ -109,12 +112,12 @@ const SignIn = () => {
           type="submit"
           className="bg-slate-700 text-white py-2 px-4 rounded-lg"
         >
-          Sign In
+          {t("Sign_In")}
         </button>
         <p className="mx-auto text-lg">
-          Don't have an account ?
+          {t("Don't_have_an_account")}
           <Link className="ms-1 underline font-bold" to={"/signUp"}>
-            Register
+            {t("Register")}
           </Link>
         </p>
       </form>

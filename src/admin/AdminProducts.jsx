@@ -2,12 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { toast } from "react-toastify";
+import useLang from "../hooks/useLang";
 
 const AdminProducts = () => {
   const storedProducts = useLocalStorage("products");
   const getStoredProducts = storedProducts.get() || [];
   const [products, setProducts] = useState(getStoredProducts);
   const [selectedImage, setSelectedImage] = useState(null);
+  const { t } = useLang();
+
 
   const [selectedProductId, setSelectedProductId] = useState(null);
 
@@ -34,28 +37,28 @@ const AdminProducts = () => {
   const confirmDelete = () => {
     setProducts(products.filter((product) => product.id !== selectedProductId));
     closeModal();
-    toast.success("Product deleted successfully.");
+    toast.success(t("Product_deleted_successfully"));
   };
 
   return (
     <div>
       <h2 className="my-4 text-center font-semibold text-3xl">
-        Admin Products Page
+        {t("Admin_Products_Page")}
       </h2>
       <Link to="add">
-        <button className="btn btn-primary w-full">Add New Product</button>
+        <button className="btn btn-primary w-full">{t("Add_New_Product")}</button>
       </Link>
       <div className="mt-5 px-5 border-t">
         <div className="overflow-x-auto">
           <table className="table w-full">
             <thead>
               <tr>
-                <th>Row</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Actions</th>
+                <th>{t("Row")}</th>
+                <th>{t("Image")}</th>
+                <th>{t("Name")}</th>
+                <th>{t("Category")}</th>
+                <th>{t("Price")}</th>
+                <th>{t("Actions")}</th>
               </tr>
             </thead>
             <tbody>
@@ -75,13 +78,13 @@ const AdminProducts = () => {
                   <td>{product.price} $</td>
                   <td className="flex gap-2">
                     <Link to={`edit/${product.id}`}>
-                      <button className="btn bg-slate-600">Edit</button>
+                      <button className="btn bg-slate-600">{t("Edit")}</button>
                     </Link>
                     <button
                       className="btn bg-red-600/80 hover:bg-red-600 duration-300"
                       onClick={() => openModal(product.id)}
                     >
-                      Delete
+                      {t("Delete")}
                     </button>
                   </td>
                 </tr>
@@ -105,21 +108,20 @@ const AdminProducts = () => {
       )}
       <dialog ref={modalRef} className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Are you sure?</h3>
+          <h3 className="font-bold text-lg">{t("AreYouSure")}?</h3>
           <p className="py-4">
-            Do you really want to delete this product? This action cannot be
-            undone.
+            {t("SureDelete")}
           </p>
           <div className="modal-action">
             <div className="flex gap-3">
               <button className="btn" onClick={closeModal}>
-                Cancel
+                {t("Cancel")}
               </button>
               <button
                 className="btn bg-red-600/80 hover:bg-red-600 duration-300"
                 onClick={confirmDelete}
               >
-                Yes, Delete
+                {t("YesDelete")}
               </button>
             </div>
           </div>

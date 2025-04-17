@@ -4,11 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { toast } from "react-toastify";
+import useLang from "../../hooks/useLang";
 
 const SignUp = () => {
   const { control, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+  const { t } = useLang();
 
   const currentUserStorage = useLocalStorage("currentUser");
   const usersStorage = useLocalStorage("users");
@@ -40,7 +42,7 @@ const SignUp = () => {
     currentUserStorage.set(data);
     localStorage.setItem("justSignedUp", "true");
 
-    toast.success("Register Successfully");
+    toast.success(t("Register_Successfully"));
     reset();
     setErrorMessage("");
 

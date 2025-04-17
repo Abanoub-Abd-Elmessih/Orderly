@@ -1,16 +1,19 @@
 import React from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import useLang from "../hooks/useLang";
 
 const Orders = () => {
   const { get } = useLocalStorage("orders");
   const orders = get() || [];
+  const { t } = useLang();
+
 
   return (
     <div className="px-5 py-10 max-w-6xl mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-8">Your Orders</h2>
+      <h2 className="text-3xl font-bold text-center mb-8">{t("orders_title")}</h2>
 
       {orders.length === 0 ? (
-        <p className="text-center text-gray-500">No orders yet.</p>
+        <p className="text-center text-gray-500">{t("no_orders")}</p>
       ) : (
         <div className="space-y-6">
           {orders.map((order, index) => (
@@ -18,7 +21,7 @@ const Orders = () => {
               key={index}
               className="p-6 rounded-lg shadow-md border border-gray-200"
             >
-              <h3 className="text-xl font-semibold mb-4">Order #{index + 1}</h3>
+              <h3 className="text-xl font-semibold mb-4">{t("Order")} #{index + 1}</h3>
 
               <ul className="divide-y">
                 {order.items.map((item) => (
@@ -42,7 +45,7 @@ const Orders = () => {
               </ul>
 
               <div className="text-right font-bold text-xl mt-4">
-                Total: $
+                {t("Total:")} $
                 {order.items
                   .reduce((acc, i) => acc + i.price * i.quantity, 0)
                   .toFixed(2)}

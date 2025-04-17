@@ -3,17 +3,19 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Trash } from "lucide-react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import useLang from "../hooks/useLang";
 
 const Cart = () => {
   const { get, set } = useLocalStorage("cart");
   const [cartItems, setCartItems] = useState(get() || []);
   const [selectedProductId, setSelectedProductId] = useState(null);
-  const [isClearAll, setIsClearAll] = useState(false); // new state
+  const [isClearAll, setIsClearAll] = useState(false);
   const modalRef = useRef(null);
+  const { t } = useLang();
 
   const openModal = (id = null, clearAll = false) => {
     setSelectedProductId(id);
-    setIsClearAll(clearAll); // distinguish between single and all delete
+    setIsClearAll(clearAll);
     if (modalRef.current) {
       modalRef.current.showModal();
     }
@@ -31,14 +33,14 @@ const Cart = () => {
     if (isClearAll) {
       set([]);
       setCartItems([]);
-      toast.success("Cart cleared successfully.");
+      toast.success(t("Cart_cleared_successfully"));
     } else {
       const updatedCart = cartItems.filter(
         (item) => item.id !== selectedProductId
       );
       set(updatedCart);
       setCartItems(updatedCart);
-      toast.success("Product removed successfully.");
+      toast.success(t("Product_removed_successfully"));
     }
     closeModal();
   };
@@ -64,22 +66,22 @@ const Cart = () => {
 
   return (
     <div className="px-5 py-10">
-      <h2 className="text-3xl font-bold text-center mb-8">Your Cart</h2>
+      <h2 className="text-3xl font-bold text-center mb-8">{t("cart_title")}</h2>
 
       {cartItems.length === 0 ? (
-        <p className="text-center text-gray-500">Your cart is empty.</p>
+        <p className="text-center text-gray-500">{t("empty_cart")}</p>
       ) : (
         <>
           <div className="overflow-x-auto max-w-full">
             <table className="w-max min-w-full border border-gray-200 text-center">
               <thead>
                 <tr>
-                  <th className="p-3 border">Image</th>
-                  <th className="p-3 border">Name</th>
-                  <th className="p-3 border">Category</th>
-                  <th className="p-3 border">Price</th>
-                  <th className="p-3 border">Quantity</th>
-                  <th className="p-3 border">Remove</th>
+                  <th className="p-3 border">{t("Image")}</th>
+                  <th className="p-3 border">{t("Name")}</th>
+                  <th className="p-3 border">{t("Category")}</th>
+                  <th className="p-3 border">{t("Price")}</th>
+                  <th className="p-3 border">{t("Quantity")}</th>
+                  <th className="p-3 border">{t("Remove")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -93,7 +95,9 @@ const Cart = () => {
                       />
                     </td>
                     <td className="p-3 border font-semibold">{item.name}</td>
-                    <td className="p-3 border text-gray-600">{item.category}</td>
+                    <td className="p-3 border text-gray-600">
+                      {item.category}
+                    </td>
                     <td className="p-3 border font-bold">${item.price}</td>
                     <td className="p-3 border">
                       <div className="flex items-center justify-center gap-2">
@@ -128,18 +132,18 @@ const Cart = () => {
           </div>
 
           <div className="text-right mt-6 text-xl font-bold">
-            Total: ${totalPrice.toFixed(2)}
+            {t("Total")}: ${totalPrice.toFixed(2)}
           </div>
 
           <div className="flex flex-col gap-3 mt-3">
             <Link to={"/checkout"} className="btn btn-primary w-full">
-              Continue to checkout
+              {t("checkout")}
             </Link>
             <button
-              onClick={() => openModal(null, true)} // show modal for clear all
+              onClick={() => openModal(null, true)}
               className="btn w-full bg-red-600 hover:bg-red-700"
             >
-              Remove All
+              {t("remove_all")}
             </button>
           </div>
         </>
@@ -147,22 +151,22 @@ const Cart = () => {
 
       <dialog ref={modalRef} className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Are you sure?</h3>
+          <h3 className="font-bold text-lg">{t("AreYouSure")}</h3>
           <p className="py-4">
             {isClearAll
-              ? "Do you really want to clear your entire cart? This action cannot be undone."
-              : "Do you really want to delete this product? This action cannot be undone."}
+              ? `${t("SureClearAll")}`
+              : `${t("SureDelete")}`}
           </p>
           <div className="modal-action">
             <div className="flex gap-3">
               <button className="btn" onClick={closeModal}>
-                Cancel
+                {t("Cancel")}
               </button>
               <button
                 className="btn bg-red-600/80 hover:bg-red-600 duration-300"
                 onClick={confirmDelete}
               >
-                Yes, Delete
+                {t("YesDelete")}
               </button>
             </div>
           </div>

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { toast } from "react-toastify";
+import useLang from "../hooks/useLang";
 
 const AddProduct = () => {
   const { get, set } = useLocalStorage("products");
   const navigate = useNavigate();
+  const { t } = useLang();
 
   const [product, setProduct] = useState({
     id: new Date().getTime(),
@@ -49,14 +51,14 @@ const AddProduct = () => {
     const currentProducts = get() || [];
     const updatedProducts = [...currentProducts, product];
     set(updatedProducts);
-    toast.success("Product Added Successfully.");
+    toast.success(t("Product_Added_Successfully"));
     navigate("/admin/dashboard/products");
   };
 
   return (
     <div className="mt-5">
       <h2 className="mb-4 text-center font-semibold text-3xl">
-        Add New Product
+        {t("Add_New_Product")}
       </h2>
       <form
         onSubmit={handleSubmit}
@@ -99,7 +101,7 @@ const AddProduct = () => {
           className="p-3 rounded-lg bg-transparent border-2 border-gray-400"
         />
 
-        <label className="font-semibold">Upload Image</label>
+        <label className="font-semibold">{t("Upload_Image")}</label>
         <input
           type="file"
           accept="image/*"
@@ -107,7 +109,7 @@ const AddProduct = () => {
           className="p-3 rounded-lg bg-transparent border-2 border-gray-400"
         />
 
-        <label className="font-semibold">Or Enter Image URL</label>
+        <label className="font-semibold">{t("Or_Enter_Image_URL")}</label>
         <input
           type="text"
           name="imageUrl"
@@ -120,7 +122,7 @@ const AddProduct = () => {
         />
 
         <button type="submit" className="btn btn-primary w-100">
-          Add Product
+          {t("Add_New_Product")}
         </button>
       </form>
     </div>
