@@ -20,10 +20,10 @@ export const Sidebar = ({ children }) => {
       drawerRef.current.checked = false;
     }
   };
-    function logout() {
-      remove();
-      navigate("/signIn");
-    }
+  function logout() {
+    remove();
+    navigate("/signIn");
+  }
 
   return (
     <div className="drawer lg:drawer-open">
@@ -79,30 +79,37 @@ export const Sidebar = ({ children }) => {
               Admin Dashboard
             </p>
             <li>
-              <Link to="/admin/dashboard" onClick={closeDrawer} >
+              <Link to="/admin/dashboard" onClick={closeDrawer}>
                 <LayoutDashboard className="size-5" />
                 Dashboard Overview
               </Link>
             </li>
             <li>
-              <Link to="products" onClick={closeDrawer} >
+              <Link to="products" onClick={closeDrawer}>
                 <Box className="size-5" />
-                Products
+                Admin Products
               </Link>
             </li>
+
             <li>
-              <Link to={"/orders"} onClick={closeDrawer} >
+              <Link to={"/orders"} onClick={closeDrawer}>
                 <ListOrdered className="size-5" />
                 Orders
               </Link>
             </li>
             <li>
-              <Link to={"/"} onClick={closeDrawer} >
+              <Link to={"/orders"} onClick={closeDrawer}>
                 <HomeIcon className="size-5" /> Home
               </Link>
             </li>
             <li>
-              <Link to={"/"} onClick={closeDrawer} >
+              <Link to="/products" onClick={closeDrawer}>
+                <Box className="size-5" />
+                Customer Products
+              </Link>
+            </li>
+            <li>
+              <Link to={"/cart"} onClick={closeDrawer}>
                 <ShoppingCartIcon className="size-5" /> Cart
               </Link>
             </li>

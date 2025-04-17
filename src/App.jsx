@@ -13,6 +13,10 @@ import DashboardOverview from "./admin/DashboardOverview";
 import AdminProducts from "./admin/AdminProducts";
 import AddProduct from "./admin/AddProducts";
 import EditProductPage from "./admin/EditProductPage";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import ProductDetails from "./pages/ProductDetails";
+import Orders from "./pages/Orders";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -31,6 +35,22 @@ const App = () => {
         {
           path: "products",
           element: <Products />,
+        },
+        {
+          path:"/product/:productId",
+          element: <ProductDetails />,
+        },
+        {
+          path: "cart",
+          element: <Cart />,
+        },
+        {
+          path: "checkout",
+          element: <Checkout />,
+        },
+        {
+          path: "orders",
+          element: <Orders />,
         },
       ],
     },

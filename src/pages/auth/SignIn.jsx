@@ -50,13 +50,13 @@ const SignIn = () => {
   };
 
   return (
-    <section className="h-screen flex flex-col justify-center items-center">
-      <h2 className="font-bold text-4xl mb-3">Welcome Back to Orderly.</h2>
-      <p className="text-2xl">Sign in to your account</p>
+    <section className="h-screen flex flex-col justify-center items-center text-center p-3">
+      <h2 className="font-bold text-2xl lg:text-4xl mb-3 text-center">Welcome Back to Orderly.</h2>
+      <p className="text-lg lg:text-2xl">Sign in to your account</p>
 
       <form
         onSubmit={handleSubmit(submit)}
-        className="flex flex-col gap-4 mt-6 w-2/3 border-2 shadow-xl p-5 rounded-lg border-black"
+        className="flex flex-col gap-4 mt-6 lg:w-2/3 border-2 shadow-xl p-5 rounded-lg border-gray-500 w-full"
       >
         {/* Error Message */}
         {errorMessage && (
@@ -107,7 +107,7 @@ const SignIn = () => {
 
         <button
           type="submit"
-          className="bg-black/90 text-white py-2 px-4 rounded-lg"
+          className="bg-slate-700 text-white py-2 px-4 rounded-lg"
         >
           Sign In
         </button>

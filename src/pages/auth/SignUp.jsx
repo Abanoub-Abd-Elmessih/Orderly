@@ -52,13 +52,13 @@ const SignUp = () => {
   };
 
   return (
-    <section className="h-screen flex flex-col justify-center items-center">
+    <section className="h-screen flex flex-col justify-center items-center p-3">
       <h2 className="font-bold text-4xl mb-3">Welcome to Orderly.</h2>
       <p className="text-2xl">Create a new account</p>
 
       <form
         onSubmit={handleSubmit(submit)}
-        className="flex flex-col gap-4 mt-6 w-2/3 border-2 shadow-xl p-5 rounded-lg border-black"
+        className="flex flex-col gap-4 mt-6 lg:w-2/3 w-full border-2 shadow-xl p-5 rounded-lg border-gray-500"
       >
         {/* Username */}
         <Controller
@@ -149,7 +149,7 @@ const SignUp = () => {
 
         <button
           type="submit"
-          className="bg-black/90 text-white py-2 px-4 rounded-lg "
+          className="bg-slate-700 text-white py-2 px-4 rounded-lg "
         >
           Submit
         </button>

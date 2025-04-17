@@ -36,6 +36,10 @@ const Products = () => {
       filtered.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
     } else if (sortOrder === "desc") {
       filtered.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+    } else if (sortOrder === "name-asc") {
+      filtered.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortOrder === "name-desc") {
+      filtered.sort((a, b) => b.name.localeCompare(a.name));
     }
 
     return filtered;
@@ -71,9 +75,11 @@ const Products = () => {
             onChange={(e) => setSortOrder(e.target.value)}
             className="select border-2"
           >
-            <option value="default" className="">Sort by</option>
+            <option value="default">Sort by</option>
             <option value="asc">Price: Low to High</option>
             <option value="desc">Price: High to Low</option>
+            <option value="name-asc">Name: A to Z</option>
+            <option value="name-desc">Name: Z to A</option>
           </select>
         </div>
       </div>

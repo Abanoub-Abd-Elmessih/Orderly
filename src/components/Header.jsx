@@ -49,9 +49,6 @@ export const Header = () => {
             <li>
               <Link to={"/cart"}>Cart</Link>
             </li>
-            <li>
-              <Link to={"/contactUs"}>Contact Us</Link>
-            </li>
           </ul>
         </div>
         <Link className="btn btn-ghost text-xl">Orderly .</Link>
@@ -71,9 +68,6 @@ export const Header = () => {
           </li>
           <li>
             <Link to={"/cart"}>Cart</Link>
-          </li>
-          <li>
-            <Link to={"/contactUs"}>Contact Us</Link>
           </li>
         </ul>
       </div>

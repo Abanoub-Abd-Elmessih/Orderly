@@ -10,7 +10,7 @@ export const Input = React.forwardRef(({ type = "text", name, placeholder, onCha
       onBlur={onBlur}
       value={value}
       ref={ref}
-      className="p-3 text-black border-2 border-gray-400 rounded-lg focus:outline-none"
+      className="input w-full"
     />
   );
 });
