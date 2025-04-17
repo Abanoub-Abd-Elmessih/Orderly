@@ -63,5 +63,6 @@
   "Product_removed_successfully":"Product removed successfully",
   "Cart_cleared_successfully":"Cart cleared successfully.",
   "Order_confirmed_successfully":"Order confirmed successfully",
-  "Register_Successfully":"Register Successfully"
+  "Register_Successfully":"Register Successfully",
+  "view":"View"
 }

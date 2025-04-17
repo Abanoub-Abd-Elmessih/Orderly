@@ -63,5 +63,6 @@
   "Product_removed_successfully": "تمت إزالة المنتج بنجاح.",
   "Cart_cleared_successfully": "تم إفراغ السلة بنجاح.",
   "Order_confirmed_successfully": "تم تأكيد الطلب بنجاح.",
-  "Register_Successfully": "تم التسجيل بنجاح"
+  "Register_Successfully": "تم التسجيل بنجاح",
+  "View": "عرض"
 }
